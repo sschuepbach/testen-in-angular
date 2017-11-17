@@ -24,8 +24,33 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>Testen mit Angular</h1>
+				</section>
+				<section>
+					<h2>Grundlagen</h2>
+				</section>
+				<section>
+					<h3>Benötigte Tools</h3>
+					<ul>
+						<li class="fragment" data-fragments-index="1">Karma
+							<ul style="font-size:50%">Test runner</ul>
+							<ul>awef</ul>
+						</li>
+						<li class="fragment" data-fragments-index="2">Jasmine
+							<ul>Test framework für Javascript</ul>
+						</li>
+						<li class="fragment" data-fragments-index="3">Angular Testing Utilities
+							<ul>Testumgebung für Angular-Applikationen</ul>
+						</li>
+						<li class="fragment" data-fragments-index="4">Angular CLI
+							<ul>Testen mit <code>ng test</code></ul>
+						</li>
+						<li class="fragment" data-fragments-index="5">IDE: Webstorm
+							<ul>Integration mit Karma</ul>
+						</li>
+				</section>
+				<section></section>
 			</div>
 		</div>
 
@@ -37,6 +62,7 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+				slideNumber: false,
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },

@@ -2,6 +2,7 @@
 *.iml
 *.iws
 *.eml
+package-lock.json
 out/
 .DS_Store
 .svn
