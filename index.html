@@ -24,11 +24,154 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+
 				<section>
 					<h1>Testen mit Angular</h1>
-					<h2 style="color:red; font-family:monospace">!Under construction!</h2>
 				</section>
-			</div>
+
+				<section>
+					<section>
+						<h2>Grundlagen</h2>
+					</section>
+					<section>
+						<h3>Testarten</h3>
+						<ul>
+							<li class="fragment" data-fragments-index="1"><b>Unittests</b>: Testen isoliert einzelne Elemente (bspw. einer Funktion)</li>
+							<li class="fragment" data-fragments-index="1"><b>Integration tests</b>: Testen Elemente in ihrem Zusammenspiel (bspw. Interaktion zwischen Service und Komponente) </li>
+							<li class="fragment" data-fragments-index="1"><b>E2E-Tests</b>: Simulieren Benutzerinteraktionen</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Tools</h3>
+						<ul>
+							<li class="fragment" data-fragments-index="1"><b>Test runner</b>: Automatisiert Tests (bspw. <b>Karma</b>)
+							<li class="fragment" data-fragments-index="2"><b>Testframework</b>: Bietet Klassen und Methoden zur Erstellung von Tests. Bspw.
+								<ul>
+									<li><b>Jasmine</b>: Testframework primär für Unit- und Integration-Tests </li>
+									<li><b>Protractor</b>: Testframework für E2E-Tests</li>
+								</ul>
+							</li>
+							<li class="fragment" data-fragments-index="3">
+								<b>Angular testing utilities</b>: Zusätzliche Methoden für das Testen von Angular-Komponenten
+							</li>
+						<ul>
+					</section>
+					<section>
+						<h3>Testen mit Angular CLI</h3>
+						<ul>
+							<li class="fragment" data-fragments-index="1"><code>ng init</code> installiert und konfiguriert Karma (<i>karma.conf.js</i>), Protractor (<i>protractor.conf.js</i>) und Jasmine</li>
+							<li class="fragment" data-fragments-index="2"><code>ng g c</code> erstellt zusätzlich zu der eigentlichen Komponente eine Testdatei (<code>...spec.ts</code>). Gleiches gilt für <i>Services</i>, <i>Pipes</i>, <i>Directives</i> und <i>Guards</i></li>
+							<li class="fragment" data-fragments-index="3"><code>ng test</code> für Tests mit Karma</li>
+							<li class="fragment" data-fragments-index="4"><code>ng e2e</code> für E2E-Tests mit Protractor</li>
+					</section>
+				</section>
+				<section>
+					<h3>Testframework: Jasmine</h3>
+					<p>Das Testframework enthält Methoden zum Schreiben von basalen Tests:</p>
+					<ul>
+						<li></li>
+					</ul>
+					<!-- TODO: Ausführen -->
+				</section>
+				<section>
+					<h3>Angular Testing Utilities</h3>
+					<p></p>
+				</section>
+				<section>
+					<h3>Testrunner: Karma</h3>
+					<p>Ein Testrunner kann Tests direkt im Browser ausführen:</p>
+					<ol>
+						<li class="fragment" data-fragments-index="1">Webserver wird aufgestartet</li>
+						<li class="fragment" data-fragments-index="2">Webserver liefert folgende Dateien aus:
+							<ul>
+								<li>Zu testende Dateien</li>
+								<li>Tests</li>
+								<li>Website, auf der die Tests durchgeführt werden</li>
+							</ul>
+						</li>
+						<li class="fragment" data-fragments-index="3">Browser wird aufgestartet</li>
+						<li class="fragment" data-fragments-index="4">Testresultate werden an Server zurückgeschickt</li>
+						<li class="fragment" data-fragments-index="5">Testresultate werden in gewünschtem Format ausgegeben</li>
+					</ol>
+				</section>
+				<section>
+					<h3>Aufsetzen der Testumgebung</h3>
+					<ol>
+						<li class="fragment" data-fragments-index="1">Neues Projekt anlegen (<code>ng n name</code>).<br />Dabei wird u.a.:
+						<ul>
+							<li>Jasmine installiert</li>
+							<li>Karma mit Konfigurationsdatei (<code>karma.conf.js</code>) installiert </li>
+						</ul></li>
+					  <li class="fragment" data-fragments-index="2">Karma in Webstorm aufsetzen
+						<ul>
+							<li>Neue Testkonfiguration anlegen:<br /><code>Edit configuration</code> -> <code>Add new configuration</code> -> <code>Karma</code></li>
+							<li>In <code>Configuration file</code> Pfad zu <code>karma.conf.js</code> eingeben</li>
+						</ul></li>
+					</ol>
+				</section>
+				<section>
+					<h2>Ein erster Test</h2>
+					<ul>
+						<li><i>Angular-CLI</i> legt ein neues Test-Skelett an für
+						<ul>
+							<li>eine neue Komponente (<code>ng g c [name]</code>)</li>
+							<li>einen neuen Service (<code>ng g s [name]</code>)</li>
+							<li>eine neue <i>directive</i> (<code>ng g d [name]</code>)</li>
+							<li>eine neue <i>pipe</i> (<code>ng g p [name]</code>)</li>
+							<li>eine neue <i>guard</i> (<code>ng g g [name]</code>)</li>
+						</ul>
+						</li>
+						<li>Die Testdatei befindet sich standardmässig im gleichen Verzeichnis, hat das Postfix <code>spec</code> und lautet ansonsten auf den gleichen Namen</li>
+				</section>
+				<section>
+					<p>Im Fall der Komponente sieht das Test-Skelett folgendermassen aus:</p>
+					<pre>
+					<code style="font-size:80%;">
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatrixComponent } from './matrix.component';
+
+describe('MatrixComponent', () => {
+	let component: MatrixComponent;
+	let fixture: ComponentFixture<MatrixComponent>;
+
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			declarations: [ MatrixComponent ]
+		})
+		.compileComponents();
+	}));
+
+	beforeEach(() => {
+		fixture = TestBed.createComponent(MatrixComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
+
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
+});</code></pre>
+				</section>
+				<section>
+				<h3>Aufsetzen eines Testbeds</h3>
+				<pre>
+				<code style="font-size:80%">
+describe('MatrixComponent', () => {
+	let component: MatrixComponent;
+
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			declarations: [ MatrixComponent ]
+		})
+		.compileComponents();
+	}));
+	<!-- (...) -->
+});
+				</code></pre>
+				<ul>
+					<li>
+				</ul>
+			</section>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
