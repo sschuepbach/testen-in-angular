@@ -156,7 +156,13 @@ body {
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
 
 .reveal code {
-  font-family: monospace; }
+	font-family: monospace;
+  padding: 2px;
+	font-size: 80%;
+	background: grey;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	letter-spacing: -2px; }
 
 .reveal pre code {
   display: block;
