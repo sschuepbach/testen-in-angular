@@ -48,6 +48,16 @@ ausgeführt wird
 
 ### Grundkomponenten Angular testing utilities
 
+Angular testing utilities
+
+The Angular testing utilities help to create a testing environment that makes writing tests for your various constructs really easy. It consists of the TestBed class and various helper functions, found under the @angular/core/testing namespace.
+
+    The TestBed class is the most important concept and creates its own testing module. In reality, when you test out a construct to detach it from the module it resides in and reattach it to the testing module created by the TestBed. The TestBed class has a configureTestModule() helper method that we use to set up the test module as needed. The TestBed can also instantiate components.
+    ComponentFixture is a class wrapping the component instance. This means that it has some functionality on it and it has a member that is the component instance itself.  
+    The DebugElement, much like the ComponentFixture, acts as a wrapper. It, however, wraps the DOM element and not the component instance. It's a bit more than that though, as it has an injector on it that allows us to access the services that have been injected into a component. More on this topic later.
+
+This was a brief overview to our testing environment, the frameworks and libraries used, as well as some important concepts that we will use heavily in the upcoming sections.
+
 ## Integrationstests
 
 ### Mocking
@@ -70,7 +80,8 @@ ausgeführt wird
 	 dazu notwendigen Entwicklungsschritte verschaffen
 1. Test schreiben, der Funktion oder Erweiterung einer Funktion testet
 2. Test laufen lassen -> Test muss fehlschlagen, entweder zur Kompilierzeit (weil Testcode nicht kompiliert) oder Laufzeit (Tests werden nicht erfüllt)
-3. So viel Code schreiben (und nur so viel!), dass Test erfüllt wird
+3. So viel Code schreiben (und nur so viel!), dass Test erfüllt wird (quick &
+	 dirty)
 4. Test laufen lassen -> Test läuft durch
 5. Refaktorieren, insbesondere: Redundanz im Code (auch zwischen Test und
 Implementation) beseitigen; Verschieben von Codeteilen dahin, wo sie logisch

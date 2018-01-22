@@ -37,7 +37,7 @@
 						<h3>Testarten</h3>
 						<ul>
 							<li class="fragment" data-fragments-index="1"><b>Isolierte Unit tests</b>: Testen einzelner Klassen</li>
-							<li class="fragment" data-fragments-index="2"><b>"Shallow" Unit tests</b>: Testen von Komponenten mit Templates</li>
+							<li class="fragment" data-fragments-index="2"><b>"Shallow" Unit tests</b>: Testen der View</li>
 							<li class="fragment" data-fragments-index="3"><b>Integrationstests</b>: Testen die Interaktion von Klassen</li>
 							<li class="fragment" data-fragments-index="4"><b>E2E-Tests</b>: Simulieren Benutzerinteraktionen</li>
 						</ul>
@@ -113,7 +113,7 @@
 					</section>
 					<section>
 						<h3>Beispiel</h3>
-						<pre><code style="font-size:80%">class IsolatedUnitTests {
+						<pre><code style="font-size:80%" data-trim data-noescape>class IsolatedUnitTests {
 	static times2(n: number) {
 		return n * 2;
 	}
@@ -130,12 +130,56 @@ describe('times2 in IsolatedUnitTests', () => { // OK!
 	it ('should return NaN value given an undefined value', () => { // OK!
 		expect(IsolatedUnitTests.times2(undefined)).toBeNaN();
 	});
-})</code></pre>
+});</code></pre>
 					</section>
 				</section>
 				<section>
-					<h2>"Shallow" Unit Tests mit Jasmine und Angular Testing Framework</h2>
-					<p style="color:red">Coming soon!</p>
+					<section>
+						<h2>"Shallow" Unit Tests mit Jasmine und Angular Testing Utilities</h2>
+					</section>
+					<section>
+						<h3>"Isolierte" vs. "Shallow" Unit Tests</h3>
+						<ul>
+							<li>Isolierte Unit Tests für: Services, Pipes, Geschäftslogik in Komponenten</li>
+							<li>"Shallow" Unit Tests für: DOM-Manipulationen in Komponenten und Templates</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Angular Testing Utilities</h3>
+						<ul>
+							<li>Sammlung von Klassen zum Testen der View</li>
+							<li>Umfasst:
+								<ul>
+									<li><code>TestBed</code>: Konfigurierbares Test-Modul zum Ausführen der Komponente</li>
+									<li><code>ComponentFixture</code>: Wrapper für Instanz der Komponente unter Test</li>
+									<li><code>DebugElement</code>: Wrapper für DOM-Element der View unter Test</li>
+								</ul>
+							</li>
+							<li>Nahtlose Integration in Jasmine-Framework</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Test-Skelett</h3>
+					<pre><code style="font-size:80%" data-trim data-noescape>&lt;!-- Imports --&gt;
+describe('TestedComponent', () => {
+	let component: TestedComponent;
+	let fixture: ComponentFixture<TestedComponent>;
+	beforeEach(async(() => { // Async-Wrapper
+		TestBed.configureTestingModule({ // Konfiguration des Testmoduls
+			declarations: [ TestedComponent ]
+		})
+		.compileComponents();
+	}));
+	beforeEach(() => {
+		fixture = TestBed.createComponent(TestedComponent); // ComponentFixture
+		component = fixture.componentInstance;
+		fixture.detectChanges(); // Bemerkt Aktualisierungen der DOM
+	});
+	it('should create', () => {
+		expect(component).toBeTruthy(); // Konnte Komponente erstellt werden?
+	});
+});</code></pre>
+					</section>
 				</section>
 				<section>
 					<h2>Integrationstests</h2>
@@ -150,23 +194,6 @@ describe('times2 in IsolatedUnitTests', () => { // OK!
 					<p style="color:red">Coming soon!</p>
 				</section>
 				<!-- <section>
-					<h3>Testrunner: Karma</h3>
-					<p>Ein Testrunner kann Tests direkt im Browser ausführen:</p>
-					<ol>
-						<li class="fragment" data-fragments-index="1">Webserver wird aufgestartet</li>
-						<li class="fragment" data-fragments-index="2">Webserver liefert folgende Dateien aus:
-							<ul>
-								<li>Zu testende Dateien</li>
-								<li>Tests</li>
-								<li>Website, auf der die Tests durchgeführt werden</li>
-							</ul>
-						</li>
-						<li class="fragment" data-fragments-index="3">Browser wird aufgestartet</li>
-						<li class="fragment" data-fragments-index="4">Testresultate werden an Server zurückgeschickt</li>
-						<li class="fragment" data-fragments-index="5">Testresultate werden in gewünschtem Format ausgegeben</li>
-					</ol>
-				</section>
-				<section>
 					<h3>Aufsetzen der Testumgebung</h3>
 					<ol>
 						<li class="fragment" data-fragments-index="1">Neues Projekt anlegen (<code>ng n name</code>).<br />Dabei wird u.a.:
@@ -199,45 +226,6 @@ describe('times2 in IsolatedUnitTests', () => { // OK!
 					<p>Im Fall der Komponente sieht das Test-Skelett folgendermassen aus:</p>
 					<pre>
 					<code style="font-size:80%;">
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatrixComponent } from './matrix.component';
-
-describe('MatrixComponent', () => {
-	let component: MatrixComponent;
-	let fixture: ComponentFixture<MatrixComponent>;
-
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
-			declarations: [ MatrixComponent ]
-		})
-		.compileComponents();
-	}));
-
-	beforeEach(() => {
-		fixture = TestBed.createComponent(MatrixComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
-
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
-});</code></pre>
-				</section>
-				<section>
-					<h3>Aufsetzen eines Testbeds</h3>
-					<pre>
-				<code style="font-size:80%">
-describe('MatrixComponent', () => {
-	let component: MatrixComponent;
-
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
-			declarations: [ MatrixComponent ]
-		})
-		.compileComponents();
-	}));
-});
 					</code></pre>
 					<ul>
 						<li>
