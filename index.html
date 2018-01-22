@@ -14,11 +14,11 @@
 
 		<!-- Printing and PDF exports -->
 		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 	</head>
 	<body>
@@ -36,42 +36,102 @@
 					<section>
 						<h3>Testarten</h3>
 						<ul>
-							<li class="fragment" data-fragments-index="1"><b>Unittests</b>: Testen isoliert einzelne Elemente (bspw. einer Funktion)</li>
-							<li class="fragment" data-fragments-index="1"><b>Integration tests</b>: Testen Elemente in ihrem Zusammenspiel (bspw. Interaktion zwischen Service und Komponente) </li>
-							<li class="fragment" data-fragments-index="1"><b>E2E-Tests</b>: Simulieren Benutzerinteraktionen</li>
+							<li class="fragment" data-fragments-index="1"><b>Isolierte Unit tests</b>: Testen einzelner Klassen</li>
+							<li class="fragment" data-fragments-index="2"><b>"Shallow" Unit tests</b>: Testen von Komponenten mit Templates</li>
+							<li class="fragment" data-fragments-index="3"><b>Integrationstests</b>: Testen die Interaktion von Klassen</li>
+							<li class="fragment" data-fragments-index="4"><b>E2E-Tests</b>: Simulieren Benutzerinteraktionen</li>
 						</ul>
 					</section>
 					<section>
 						<h3>Tools</h3>
 						<ul>
 							<li class="fragment" data-fragments-index="1"><b>Test runner</b>: Automatisiert Tests (bspw. <b>Karma</b>)
-							<li class="fragment" data-fragments-index="2"><b>Testframework</b>: Bietet Klassen und Methoden zur Erstellung von Tests. Bspw.
+								<li class="fragment" data-fragments-index="2"><b>Testframework</b>: Bietet Klassen und Methoden zur Erstellung von Tests. Bspw.
+									<ul>
+										<li><b>Jasmine</b>: Testframework primär für Unit- und Integration-Tests </li>
+										<li><b>Protractor</b>: Testframework für E2E-Tests</li>
+									</ul>
+								</li>
+								<li class="fragment" data-fragments-index="3">
+									<b>Angular testing utilities</b>: Zusätzliche Methoden für das Testen von Angular-Komponenten
+								</li>
 								<ul>
-									<li><b>Jasmine</b>: Testframework primär für Unit- und Integration-Tests </li>
-									<li><b>Protractor</b>: Testframework für E2E-Tests</li>
-								</ul>
-							</li>
-							<li class="fragment" data-fragments-index="3">
-								<b>Angular testing utilities</b>: Zusätzliche Methoden für das Testen von Angular-Komponenten
-							</li>
-						<ul>
 					</section>
 					<section>
 						<h3>Testen mit Angular CLI</h3>
 						<ul>
-							<li class="fragment" data-fragments-index="1"><code>ng init</code> installiert und konfiguriert Karma (<i>karma.conf.js</i>), Protractor (<i>protractor.conf.js</i>) und Jasmine</li>
+							<li class="fragment" data-fragments-index="1"><code>ng new</code> installiert und konfiguriert Karma (<i>karma.conf.js</i>), Protractor (<i>protractor.conf.js</i>) und Jasmine</li>
 							<li class="fragment" data-fragments-index="2"><code>ng g c</code> erstellt zusätzlich zu der eigentlichen Komponente eine Testdatei (<code>...spec.ts</code>). Gleiches gilt für <i>Services</i>, <i>Pipes</i>, <i>Directives</i> und <i>Guards</i></li>
 							<li class="fragment" data-fragments-index="3"><code>ng test</code> für Tests mit Karma</li>
 							<li class="fragment" data-fragments-index="4"><code>ng e2e</code> für E2E-Tests mit Protractor</li>
 					</section>
 				</section>
 				<section>
-					<h3>Testframework: Jasmine</h3>
-					<p>Das Testframework enthält Methoden zum Schreiben von basalen Tests:</p>
-					<ul>
-						<li></li>
-					</ul>
-					<!-- TODO: Ausführen -->
+					<section>
+						<h2>Isolierte Unit Tests mit Jasmine</h2>
+					</section>
+					<section>
+						<h3>Grundlagen Unit Testing</h3>
+						<ul>
+							<li class="fragment" data-fragments-index="1">Ein Unit Test ist eine Annahme über die Funktionsweise von Code</li>
+							<li class="fragment" data-fragments-index="2">Wichtig: Auch "edge cases" für Inputs testen! Bspw.
+								<ul>
+									<li>für Zahlen: <code>undefined</code>, <code>0</code>, negative Zahlen, Maximal-/Minimalwerte</li>
+									<li>für Strings: <code>undefined</code>, <code>''</code>, Steuer- / Sonderzeichen</li>
+								</ul>
+							</li>
+							<li class="fragment" data-fragments-index="3">Tests sind kein Beweis für Fehlerfreiheit!</li>
+							<li class="fragment" data-fragments-index="4">Tests werden in separater Datei geschrieben</li>
+							<li class="fragment" data-fragments-index="5">Jasmine: BDD-Framework &#65515; Spezifikationen in "natürlicher" Sprache</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Jasmine: Methoden (Auswahl)</h3>
+						<ul>
+							<li class="fragment" data-fragments-index="1"><code>describe</code>: Erstellt eine Gruppe von Spezifikationen</li>
+							<li class="fragment" data-fragments-index="2"><code>it</code>: Ertellt eine Spezifikation</li>
+							<li class="fragment" data-fragments-index="3"><code>expect</code>: Erstellt eine Erwartung für einen Test (wird durch <i>Matcher</i> spezifiziert)</li>
+							<li class="fragment" data-fragments-index="4"><code>beforeEach</code> / <code>beforeAll</code>: Führt Funktion vor einer / allen Spezifikationen aus</li>
+					</section>
+					<section>
+						<h3>Jasmine: Matchers</h3>
+						<ul>
+							<li class="fragment" data-fragments-index="1"><i>Matchers</i>: Vergleichen erwarteten mit tatsächlichem Wert eines Objektes</li>
+							<li class="fragment" data-fragments-index="2">Muster: <code>expect(&lt;obj&gt;).{not.}matcher(&lt;testwert&gt;)</code></li>
+							<li class="fragment" data-fragments-index="3">Matchers (Auswahl):
+								<ul>
+									<li class="fragment" data-fragments-index="4"><code>toBeDefined</code> / <code>toBeUndefined</code>: Objekt ist definiert / nicht definiert</li>
+									<li class="fragment" data-fragments-index="5"><code>toBe</code>: Werte sind gleich (<code>===</code>)</li>
+									<li class="fragment" data-fragments-index="6"><code>toContain</code>: Objekt enthält Wert</li>
+									<li class="fragment" data-fragments-index="7"><code>toMatch</code>: Wert matcht mit regulärem Ausdruck</li>
+									<li class="fragment" data-fragments-index="8"><code>toEqual</code>: Objektgleichheit</li>
+									<li class="fragment" data-fragments-index="9"><code>toBeTruthy</code> / <code>toBeFalsy</code>: Objekt ist <code>true</code> / <code>false</code></li>
+									<li class="fragment" data-fragments-index="10"><code>toThrow</code>: Wirft Fehler</li>
+								</ul>
+							</li>
+							</ul>
+					</section>
+					<section>
+						<h3>Beispiel</h3>
+						<pre><code style="font-size:80%">class IsolatedUnitTests {
+	static times2(n: number) {
+		return n * 2;
+	}
+}
+
+// Tests normalerweise in separater Datei!
+describe('times2 in IsolatedUnitTests', () => { // OK!
+	it ('should return 6 given 3', () => {
+			expect(IsolatedUnitTests.times2(3)).toBe(6);
+	});
+	it ('should return 4 given -2', () => { // Schlägt fehl!
+		expect(IsolatedUnitTests.times2(-2)).toBe(4);
+	});
+	it ('should return NaN value given an undefined value', () => { // OK!
+		expect(IsolatedUnitTests.times2(undefined)).toBeNaN();
+	});
+})</code></pre>
+					</section>
 				</section>
 				<section>
 					<h3>Angular Testing Utilities</h3>
@@ -98,28 +158,28 @@
 					<h3>Aufsetzen der Testumgebung</h3>
 					<ol>
 						<li class="fragment" data-fragments-index="1">Neues Projekt anlegen (<code>ng n name</code>).<br />Dabei wird u.a.:
-						<ul>
-							<li>Jasmine installiert</li>
-							<li>Karma mit Konfigurationsdatei (<code>karma.conf.js</code>) installiert </li>
-						</ul></li>
-					  <li class="fragment" data-fragments-index="2">Karma in Webstorm aufsetzen
-						<ul>
-							<li>Neue Testkonfiguration anlegen:<br /><code>Edit configuration</code> -> <code>Add new configuration</code> -> <code>Karma</code></li>
-							<li>In <code>Configuration file</code> Pfad zu <code>karma.conf.js</code> eingeben</li>
-						</ul></li>
+							<ul>
+								<li>Jasmine installiert</li>
+								<li>Karma mit Konfigurationsdatei (<code>karma.conf.js</code>) installiert </li>
+							</ul></li>
+							<li class="fragment" data-fragments-index="2">Karma in Webstorm aufsetzen
+								<ul>
+									<li>Neue Testkonfiguration anlegen:<br /><code>Edit configuration</code> -> <code>Add new configuration</code> -> <code>Karma</code></li>
+									<li>In <code>Configuration file</code> Pfad zu <code>karma.conf.js</code> eingeben</li>
+								</ul></li>
 					</ol>
 				</section>
 				<section>
 					<h2>Ein erster Test</h2>
 					<ul>
 						<li><i>Angular-CLI</i> legt ein neues Test-Skelett an für
-						<ul>
-							<li>eine neue Komponente (<code>ng g c [name]</code>)</li>
-							<li>einen neuen Service (<code>ng g s [name]</code>)</li>
-							<li>eine neue <i>directive</i> (<code>ng g d [name]</code>)</li>
-							<li>eine neue <i>pipe</i> (<code>ng g p [name]</code>)</li>
-							<li>eine neue <i>guard</i> (<code>ng g g [name]</code>)</li>
-						</ul>
+							<ul>
+								<li>eine neue Komponente (<code>ng g c [name]</code>)</li>
+								<li>einen neuen Service (<code>ng g s [name]</code>)</li>
+								<li>eine neue <i>directive</i> (<code>ng g d [name]</code>)</li>
+								<li>eine neue <i>pipe</i> (<code>ng g p [name]</code>)</li>
+								<li>eine neue <i>guard</i> (<code>ng g g [name]</code>)</li>
+							</ul>
 						</li>
 						<li>Die Testdatei befindet sich standardmässig im gleichen Verzeichnis, hat das Postfix <code>spec</code> und lautet ansonsten auf den gleichen Namen</li>
 				</section>
@@ -153,8 +213,8 @@ describe('MatrixComponent', () => {
 });</code></pre>
 				</section>
 				<section>
-				<h3>Aufsetzen eines Testbeds</h3>
-				<pre>
+					<h3>Aufsetzen eines Testbeds</h3>
+					<pre>
 				<code style="font-size:80%">
 describe('MatrixComponent', () => {
 	let component: MatrixComponent;
@@ -167,17 +227,17 @@ describe('MatrixComponent', () => {
 	}));
 	<!-- (...) -->
 });
-				</code></pre>
-				<ul>
-					<li>
-				</ul>
-			</section>
-		</div>
+					</code></pre>
+					<ul>
+						<li>
+					</ul>
+				</section>
+			</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+			<script src="lib/js/head.min.js"></script>
+			<script src="js/reveal.js"></script>
 
-		<script>
+			<script>
 			// More info about config & dependencies:
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
@@ -190,6 +250,6 @@ describe('MatrixComponent', () => {
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
-		</script>
+			</script>
 	</body>
 </html>
