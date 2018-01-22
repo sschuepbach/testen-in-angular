@@ -11,8 +11,8 @@ section.has-light-background, section.has-light-background h1, section.has-light
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: #222;
-  background-color: #222; }
+	background: #222;
+	background-color: #222; }
 
 .reveal {
   font-family: "Source Sans Pro", Helvetica, sans-serif;
@@ -104,10 +104,12 @@ body {
   list-style-type: disc; }
 
 .reveal ul ul {
-  list-style-type: square; }
+  list-style-type: square;
+  font-size: 80% }
 
 .reveal ul ul ul {
-  list-style-type: circle; }
+  list-style-type: circle;
+  font-size: 65%; }
 
 .reveal ul ul,
 .reveal ul ol,
@@ -147,7 +149,7 @@ body {
   display: block;
   position: relative;
   width: 90%;
-  margin: 20px auto;
+  margin: 0;
   text-align: left;
   font-size: 0.55em;
   font-family: monospace;
@@ -156,19 +158,19 @@ body {
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
 
 .reveal code {
-	font-family: monospace;
+  font-family: monospace;
   padding: 2px;
-	font-size: 80%;
-	background: grey;
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	letter-spacing: -2px; }
+  font-size: 80%;
+  background: grey;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  letter-spacing: -2px; }
 
 .reveal pre code {
   display: block;
   padding: 5px;
   overflow: auto;
-  max-height: 400px;
+  max-height: 550px;
   word-wrap: normal; }
 
 .reveal table {
