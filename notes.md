@@ -130,13 +130,29 @@ Obwohl aufwendiger als der Ansatz mit async() oder fakeAsync(), ist er ab und an
 notwendig (bspw. um auf den `intervalTimer` beim Testen von
 `Observable`-Methoden zuzugreifen).
 
-### Testen einer Komponente mit Inputs und Outputs
+### Testen der Interaktion mit einer Kindkomponente
 
 * Ziel: Testen, ob property und event bindings funktionieren wie erwartet
 * Test setzt Input-Variablen und beobachtet entsprechende Outputs
+* Zwei Strategien:
+	* Testen als stand-alone Komponente
+	* Testen, wie Kind-Komponente von der Host-Komponente gebraucht wird (mithilfe
+einer test host component)
 
 
 ### Testen einer gerouteten Komponente
+
+* Wenn keine komplexen Routing-Funktionalität in einer Komponente aufgerufen
+werden, genügt es oftmals, den Router-Service durch einen Stub zu ersetzen
+* `inject`: Funktion, die einen Service in die Testfunktion injiziert und es
+ermöglicht, den Service zu ändern oder zu beobachten (spy on). Die Funktion
+hat zwei Parameter:
+  * Einen Array mit den Services
+  * Eine anonyme Testfunktion, deren Parameter exakt der Anzahl und der
+Reihenfolge der injizierten Services entsprechen
+* Wenn ein Service benötigt wird, der durch den Injektor der Komponente zur
+Verfügung gestellt wird, muss der Service durch
+`fixture.debugElement.injector.get(<service>)` geholt werden
 
 ### Testen einer RouterOutlet-Komponente
 

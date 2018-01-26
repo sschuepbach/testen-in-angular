@@ -150,9 +150,9 @@ describe('times2 in IsolatedUnitTests', () => { // OK!
 							<li>Sammlung von Klassen, die das Testen der View erleichtern</li>
 							<li>Umfasst:
 								<ul>
-									<li><code>TestBed</code>: Konfigurierbares Test-Modul zum Ausführen der Komponente</li>
-									<li><code>ComponentFixture</code>: Referenz auf Instanz der Komponente unter Test</li>
-									<li><code>DebugElement</code>: Wrapper für DOM-Element(e) der View unter Test</li>
+									<li><a href="https://angular.io/api/core/testing/TestBed" target="api"><code>TestBed</code></a>: Konfigurierbares Test-Modul zum Ausführen der Komponente. Enthält <a href="https://angular.io/guide/testing#testbed-class-summary" target="api">Methoden</a> zur Manipulation des globalen Test-Moduls</li>
+									<li><a href="https://angular.io/api/core/testing/ComponentFixture" target="api"><code>ComponentFixture</code></a>: Referenz auf Instanz der Komponente unter Test. Enthält <a href="https://angular.io/guide/testing#componentfixture-methods" target="api">Methoden</a> zum Auslösen von Aktionen im Komponenten-Baum</li>
+									<li><a href="https://angular.io/api/core/DebugElement" target="api"><code>DebugElement</code></a>: Wrapper für DOM-Element(e) der View unter Test. Enthält <a href="https://angular.io/guide/testing#debugelement" target="api">Methoden</a> für Suche in und Manipulation der DOM</li>
 								</ul>
 							</li>
 							<li>Nahtlose Integration in Jasmine-Framework</li>
@@ -180,6 +180,13 @@ describe('TestedComponent', () => {
 	});
 });</code></pre>
 					</section>
+				<section>
+					<h3>Testen der DOM mit DebugElement</h3>
+					<ul>
+						<li><code>debugElement</code>: Gibt Referenz vom Type <a href="https://angular.io/api/core/DebugElement" target="api"><code>DebugElement</code></a> auf DOM-Element zurück.</li>
+						<li></li>
+					</ul>
+				</section>
 				</section>
 				<section>
 					<h2>Integrationstests</h2>
