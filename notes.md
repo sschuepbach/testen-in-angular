@@ -67,9 +67,6 @@ automatisch, in der Testumgebung muss dies "by design" manuell ausgelöst werden
 
 ### Testen der DOM mit DebugElement
 
-* `debugElement`: Gibt eine Referenz auf das DOM-Element zurück, nach dem
-mit Hilfe der Methode `query` bzw. `queryAll` gesucht wurde
-
 ### Testen einer Komponente mit einem Service
 
 Test Doubles definieren:

@@ -153,12 +153,12 @@ describe('times2 in IsolatedUnitTests', () => { // OK!
 					<section>
 						<h3>Angular Testing Utilities</h3>
 						<ul>
-							<li>Sammlung von Klassen, die das Testen der View erleichtern</li>
-							<li>Umfasst:
+							<li class="fragment" data-fragments-index="1">Sammlung von Klassen, die das Testen der View erleichtern</li>
+							<li class="fragment" data-fragments-index="2">Umfasst:
 								<ul>
-									<li><a href="https://angular.io/api/core/testing/TestBed" target="api"><code>TestBed</code></a>: Konfigurierbares Test-Modul zum Ausführen der Komponente. Enthält <a href="https://angular.io/guide/testing#testbed-class-summary" target="api">Methoden</a> zur Manipulation des globalen Test-Moduls</li>
-									<li><a href="https://angular.io/api/core/testing/ComponentFixture" target="api"><code>ComponentFixture</code></a>: Referenz auf Instanz der Komponente unter Test. Enthält <a href="https://angular.io/guide/testing#componentfixture-methods" target="api">Methoden</a> zum Auslösen von Aktionen im Komponenten-Baum</li>
-									<li><a href="https://angular.io/api/core/DebugElement" target="api"><code>DebugElement</code></a>: Wrapper für DOM-Element(e) der View unter Test. Enthält <a href="https://angular.io/guide/testing#debugelement" target="api">Methoden</a> für Suche in und Manipulation der DOM</li>
+									<li class="fragment" data-fragments-index="3"><a href="https://angular.io/api/core/testing/TestBed" target="api"><code>TestBed</code></a>: Konfigurierbares Test-Modul zum Ausführen der Komponente. Enthält <a href="https://angular.io/guide/testing#testbed-class-summary" target="api">Methoden</a> zur Manipulation des globalen Test-Moduls</li>
+									<li class="fragment" data-fragments-index="4"><a href="https://angular.io/api/core/testing/ComponentFixture" target="api"><code>ComponentFixture</code></a>: Referenz auf Instanz der Komponente unter Test. Enthält <a href="https://angular.io/guide/testing#componentfixture-methods" target="api">Methoden</a> zum Auslösen von Aktionen im Komponenten-Baum</li>
+									<li class="fragment" data-fragments-index="5"><a href="https://angular.io/api/core/DebugElement" target="api"><code>DebugElement</code></a>: Wrapper für DOM-Element(e) der View unter Test. Enthält <a href="https://angular.io/guide/testing#debugelement" target="api">Methoden</a> für Suche in und Manipulation der DOM</li>
 								</ul>
 							</li>
 							<li>Nahtlose Integration in Jasmine-Framework</li>
@@ -189,10 +189,26 @@ describe('TestedComponent', () => {
 				<section>
 					<h3>Testen der DOM mit DebugElement</h3>
 					<ul>
-						<li><code>debugElement</code>: Gibt Referenz vom Type <a href="https://angular.io/api/core/DebugElement" target="api"><code>DebugElement</code></a> auf DOM-Element zurück.</li>
-						<li></li>
+						<li  class="fragment" data-fragments-index="1"><code>debugElement</code>: Gibt Referenz vom Typ <a href="https://angular.io/api/core/DebugElement" target="api"><code>DebugElement</code></a> auf DOM-Element zurück.</li>
+            <li class="fragment" data-fragments-index="2">Einige Methoden von <code>DebugElement</code>:
+                <ul>
+                    <li class="fragment" data-fragments-index="3"><code>query(&lt;pred&gt;)</code> / <code>queryAll(&lt;pred&gt;)</code>: Nimmt ein Prädikat entgegen und gibt das erste / alle passenden <code>DebugElement</code>(s) zurück. Prädikate werden mit statischen Methoden der Klasse <a href="https://angular.io/api/platform-browser/By" target="api"><code>By</code></a> gebildet</li>
+                    <li class="fragment" data-fragments-index="4"><code>nativeElement</code>: Gibt von <code>DebugElement</code> referenziertes DOM-Element zurück</li>
+                    <li class="fragment" data-fragments-index="5"><code>injector</code>: Gibt den <i>Injector</i> der Komponente zurück</li>
+                    <li class="fragment" data-fragments-index="6"><code>triggerEventHandler</code>: <a href="https://www.w3schools.com/jsref/dom_obj_event.asp" target="api"><i>Event</i></a> für DOM-Element auslösen</li>
+                </ul>
+            </li>
 					</ul>
 				</section>
+        <section>
+        <h3>Testen einer Komponente mit einem Service</h3>
+          <ul>
+            <li class="fragment" data-fragment-index="1"></li>
+            <li class="fragment" data-fragment-index="2"></li>
+            <li class="fragment" data-fragment-index="3"></li>
+            <li class="fragment" data-fragment-index="4"></li>
+          </ul>
+        </section>
 				</section>
 				<section>
 					<h2>Integrationstests</h2>
@@ -206,44 +222,6 @@ describe('TestedComponent', () => {
 					<h2>Test-Driven Development</h2>
 					<p style="color:red">Coming soon!</p>
 				</section>
-				<!-- <section>
-					<h3>Aufsetzen der Testumgebung</h3>
-					<ol>
-						<li class="fragment" data-fragments-index="1">Neues Projekt anlegen (<code>ng n name</code>).<br />Dabei wird u.a.:
-							<ul>
-								<li>Jasmine installiert</li>
-								<li>Karma mit Konfigurationsdatei (<code>karma.conf.js</code>) installiert </li>
-							</ul></li>
-							<li class="fragment" data-fragments-index="2">Karma in Webstorm aufsetzen
-								<ul>
-									<li>Neue Testkonfiguration anlegen:<br /><code>Edit configuration</code> -> <code>Add new configuration</code> -> <code>Karma</code></li>
-									<li>In <code>Configuration file</code> Pfad zu <code>karma.conf.js</code> eingeben</li>
-								</ul></li>
-					</ol>
-				</section>
-				<section>
-					<h2>Ein erster Test</h2>
-					<ul>
-						<li><i>Angular-CLI</i> legt ein neues Test-Skelett an für
-							<ul>
-								<li>eine neue Komponente (<code>ng g c [name]</code>)</li>
-								<li>einen neuen Service (<code>ng g s [name]</code>)</li>
-								<li>eine neue <i>directive</i> (<code>ng g d [name]</code>)</li>
-								<li>eine neue <i>pipe</i> (<code>ng g p [name]</code>)</li>
-								<li>eine neue <i>guard</i> (<code>ng g g [name]</code>)</li>
-							</ul>
-						</li>
-						<li>Die Testdatei befindet sich standardmässig im gleichen Verzeichnis, hat das Postfix <code>spec</code> und lautet ansonsten auf den gleichen Namen</li>
-				</section>
-				<section>
-					<p>Im Fall der Komponente sieht das Test-Skelett folgendermassen aus:</p>
-					<pre>
-					<code style="font-size:80%;">
-					</code></pre>
-					<ul>
-						<li>
-					</ul>
-				</section> -->
 			</div>
 
 			<script src="lib/js/head.min.js"></script>
